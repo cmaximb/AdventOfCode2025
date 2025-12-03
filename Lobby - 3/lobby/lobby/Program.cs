@@ -78,7 +78,7 @@ namespace lobby
                 double tot = 0;
                 int p = -1;
 
-                for (int j = 11; j >= 0; j--)
+                for (int j = 12; j >= 0; j--)
                 {  
                     var highest = 0;
                     int d = p;

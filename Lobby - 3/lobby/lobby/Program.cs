@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Schema;
 
 namespace lobby
 {
@@ -13,6 +14,12 @@ namespace lobby
         static void Main(string[] args)
         {
             string[] file = File.ReadAllLines("Input.txt");
+            Console.WriteLine("Part1: " + Part1(file));
+            Console.WriteLine("Part2: " + Part2(file));
+        }
+
+        static string Part1(string[] file) 
+        { 
             int output = 0;
 
             foreach (string l in file) {
@@ -58,8 +65,42 @@ namespace lobby
                 else
                     output += sechighest * 10 + highest;
             }
+            
+            return output.ToString();
+        }
 
-            Console.WriteLine(output);
+        static string Part2(string[] File)
+        {
+            double output = 0;
+
+            foreach (string l in File)
+            {
+                double tot = 0;
+                int p = -1;
+
+                for (int j = 11; j >= 0; j--)
+                {  
+                    var highest = 0;
+                    int d = p;
+                    p = -1;
+
+                    for (int i = d + 1; i < l.Length - j; i++)
+                    {
+                        if (int.Parse(l[i].ToString()) > highest)
+                        {
+                            highest = int.Parse(l[i].ToString());
+                            p = i;
+                        }
+                    }
+
+                    tot *= 10;
+                    tot += highest;
+                }
+
+                output += tot;
+            }
+
+            return output.ToString();
         }
     }
 }

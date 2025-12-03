@@ -40,10 +40,23 @@ namespace lobby
                     i += 1;
                 }
 
-                Console.WriteLine($"p1:{p1} p2:{p2}");
+                if (p2 < p1 && p1 != l.Length - 1)
+                {
+                    sechighest = 0;
+                    for (int j = p1 + 1; j < l.Length; j++)
+                    {
+                        if (int.Parse($"{l[j]}") > sechighest)
+                        {
+                            sechighest = int.Parse($"{l[j]}");
+                            p2 = j;
+                        }
+                    }
+                }
 
-                output += p2 < p1 ? (sechighest * 10) : sechighest;
-                output += p1 < p2 ? (highest * 10) : highest;
+                if (p2 > p1)
+                    output += highest * 10 + sechighest;
+                else
+                    output += sechighest * 10 + highest;
             }
 
             Console.WriteLine(output);

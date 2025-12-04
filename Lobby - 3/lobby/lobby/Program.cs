@@ -14,8 +14,16 @@ namespace lobby
         static void Main(string[] args)
         {
             string[] file = File.ReadAllLines("Input.txt");
+
+            var watch = Stopwatch.StartNew();
             Console.WriteLine("Part1: " + Part1(file));
+            watch.Stop();
+            Console.WriteLine("Time: " + watch.Elapsed + "s");
+
+            watch = Stopwatch.StartNew();
             Console.WriteLine("Part2: " + Part2(file));
+            watch.Stop();
+            Console.WriteLine("Time: " + watch.Elapsed + "s");
         }
 
         static string Part1(string[] file) 
@@ -50,6 +58,7 @@ namespace lobby
                 if (p2 < p1 && p1 != l.Length - 1)
                 {
                     sechighest = 0;
+
                     for (int j = p1 + 1; j < l.Length; j++)
                     {
                         if (int.Parse($"{l[j]}") > sechighest)
@@ -78,9 +87,9 @@ namespace lobby
                 double tot = 0;
                 int p = -1;
 
-                for (int j = 12; j >= 0; j--)
+                for (int j = 11; j >= 0; j--)
                 {  
-                    var highest = 0;
+                    int highest = 0;
                     int d = p;
                     p = -1;
 
@@ -100,7 +109,7 @@ namespace lobby
                 output += tot;
             }
 
-            return output.ToString();
+            return $"{output} ";
         }
     }
 }

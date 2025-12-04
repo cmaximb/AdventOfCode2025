@@ -53,20 +53,14 @@ namespace printing_department
             string[] file = File.ReadAllLines("input.txt");
             int total = -1;
             bool[,] window = new bool[3,3];
-            int old_total = -1;
 
             bool Part2 = true;
-            StreamWriter writer = new StreamWriter("final_rolls_layout.txt");
-
             int num_gone = 0;
 
             while (total != 0)
             {
-                old_total = total;
                 total = 0;
 
-                //writer.Dispose();
-                //writer = new StreamWriter("final_rolls_layout.txt");
                 string[] newFile = (string[])file.Clone();
 
                 for (int l = 0; l < file.Length; l++)
@@ -78,7 +72,6 @@ namespace printing_department
                         if (file[l][c] == '@')
                         {
                             window = find_adjacent_paper_roll(file, l, c);
-
                             window_total = sum_up_each_window(window);
                         }
 
@@ -87,34 +80,29 @@ namespace printing_department
                             newFile[l] = file[l].ReplaceAt(c, 'X');
                             total++;
                         }
-                        
-                        Console.Write($"{newFile[l][c]}");
                     } 
-                    Console.WriteLine("");
                 }
                 
                 num_gone += total;
 
-                writer.WriteLine("");
-
-                int output = 0;
-                foreach (string line in file)
-                {
-                    foreach (char c in line)
-                    {
-                        if (c == 'X')
-                            output++;
-                    }
-                }
-                Console.WriteLine($" {output}"); 
                 file = newFile;
 
                 if (!Part2)
                     break;
             }
 
-            writer.Close();
-            Console.WriteLine($"{num_gone}");
+            int output = 0;
+            foreach (string line in file)
+            {
+                foreach (char c in line)
+                {
+                    if (c == 'X')
+                        output++;
+                }
+            }
+
+            // Console.WriteLine($"{num_gone}");
+            Console.WriteLine($"{output}");
         }
     }
 
